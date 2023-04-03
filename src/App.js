@@ -1,37 +1,38 @@
-import Button from "./Button.js";
-// .module.css 파일 안 class 이름을 className으로 사용
-import styles from "./App.module.css";
-
-import {useState, useEffect} from "react";
-
-// useEffect(한번만 실행하고 싶은 함수 , [변하는 부분 알려주기])
-
-function Hello() {
-  useEffect(function () {
-    console.log("hi :)");
-		// cleanup function
-    return function () {
-      console.log("bye :(");
-    };
-  }, []);
-
-	useEffect(() => {
-		console.log("hi :)");
-		// cleanup function
-    return () => console.log("bye :(");
-  }, []);
-  return <h1>Hello</h1>;
-}
+import { useState } from "react";
 
 function App() {
-  const [showing, setShowing] = useState(false);
-  const onClick = () => setShowing((prev) => !prev);
+  const [toDo, setToDo] = useState("");
+  const [toDos, setToDos] = useState([]);
+  const onChange = (event) => setToDo(event.target.value);
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if (toDo === "") {
+      return;
+    }
+    // ...array : array안의 itenm들을 만 return
+    setToDos((currentArray) => [toDo, ...currentArray]);
+    setToDo("");
+  };
   return (
     <div>
-			{showing ? <Hello /> : null}
-      <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
+      <h1>My To Dos ({toDos.length})</h1>
+      <form onSubmit={onSubmit}>
+        <input
+          onChange={onChange}
+          value={toDo}
+          type="text"
+          placeholder="Write your to do..."
+        />
+        <button>Add To Do</button>
+      </form>
+      <hr />
+      <ul>
+        {/* array.map() : array안 item, index 를 순서대로 return */}
+        {toDos.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }
-
 export default App;
