@@ -1,10 +1,14 @@
 import PropTypes from "prop-types";
+// 페이지 새로고침 없이 url 이동
+import { Link } from "react-router-dom";
 
-function Movies({m_cover_img, title, summary, genres}) {
+export default function Movies({m_cover_img, title, summary, genres}) {
     return (
         <div>
             <img src={m_cover_img} />
-            <h2>{title}</h2>
+            <h2>
+                <Link to="/detail">{title}</Link>
+            </h2>
             <p>{summary}</p>
             <ul>
                 {genres.map((g) => (
@@ -23,5 +27,3 @@ Movies.propTypes = {
     summary: PropTypes.string.isRequired,
     genres: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
-
-export default Movies
