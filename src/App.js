@@ -13,7 +13,8 @@ export default function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/detail">
+        {/* :id 로 원하는 변수값 받아 url로 사용할 수 있음 */}
+        <Route path="/detail/:id">
           <Detail />
         </Route>
         <Route path="/">

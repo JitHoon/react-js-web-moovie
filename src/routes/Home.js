@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Movies from "../components/Movies";
 
 export default function Home() {
-    const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
   /* 기존 Fetch API 문법
   fetch('http://example.com/movies.json')
@@ -28,7 +28,9 @@ export default function Home() {
       : (<div>
           {movies.map((movie) => (
           <Movies
-            key={movie.id} 
+            key={movie.id}
+            // id값을 자식 component로 넘겨주기
+            id={movie.id} 
             m_cover_img={movie.medium_cover_image} 
             title={movie.title}
             summary={movie.summary}
